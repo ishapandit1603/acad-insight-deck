@@ -9,17 +9,22 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90",
-        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
-        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+        default: "bg-primary text-primary-foreground hover:bg-primary/90 shadow-erp-card",
+        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-erp-card",
+        outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground shadow-erp-card",
+        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80 shadow-erp-card",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
+        erp: "bg-gradient-erp text-primary-foreground hover:shadow-erp-glow transform hover:scale-105 transition-all duration-200 shadow-erp",
+        "erp-secondary": "bg-gradient-erp-secondary text-secondary-foreground hover:shadow-erp-glow transform hover:scale-105 transition-all duration-200 shadow-erp-card",
+        "erp-outline": "border-2 border-erp-cyan text-erp-cyan bg-transparent hover:bg-erp-cyan hover:text-white transition-all duration-200 shadow-erp-card hover:shadow-erp",
+        "erp-navy": "bg-erp-navy text-white hover:bg-erp-navy/90 shadow-erp-card hover:shadow-erp transform hover:scale-105 transition-all duration-200",
       },
       size: {
         default: "h-10 px-4 py-2",
         sm: "h-9 rounded-md px-3",
         lg: "h-11 rounded-md px-8",
+        xl: "h-12 rounded-lg px-10 text-base",
         icon: "h-10 w-10",
       },
     },
