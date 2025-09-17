@@ -303,7 +303,8 @@ export const studyContent: StudyContent[] = [
     description: 'Comprehensive lecture on binary tree data structures, traversal methods, and implementation techniques.',
     subjectId: '1',
     type: 'lecture',
-    transcript: 'Welcome to the lecture on Binary Trees. A binary tree is a tree data structure where each node has at most two children, which are referred to as the left child and the right child...',
+    audioUrl: 'binary-trees-lecture.mp3',
+    transcript: 'Welcome to the lecture on Binary Trees. A binary tree is a tree data structure where each node has at most two children, which are referred to as the left child and the right child. Binary trees are fundamental data structures used in computer science for organizing and storing data efficiently. They provide logarithmic time complexity for search, insertion, and deletion operations when balanced.',
     duration: '45:30',
     uploadDate: '2024-01-10'
   },
@@ -313,7 +314,8 @@ export const studyContent: StudyContent[] = [
     description: 'Detailed tutorial on SQL joins, foreign keys, and database relationships.',
     subjectId: '2',
     type: 'tutorial',
-    transcript: 'In this tutorial, we will explore SQL joins. Joins are used to combine rows from two or more tables based on a related column between them...',
+    audioUrl: 'sql-joins-tutorial.mp3',
+    transcript: 'In this tutorial, we will explore SQL joins. Joins are used to combine rows from two or more tables based on a related column between them. There are different types of joins including INNER JOIN, LEFT JOIN, RIGHT JOIN, and FULL OUTER JOIN. Each type serves different purposes in database querying and data retrieval.',
     duration: '32:15',
     uploadDate: '2024-01-12'
   },
@@ -323,8 +325,31 @@ export const studyContent: StudyContent[] = [
     description: 'Overview of Agile software development practices and Scrum framework.',
     subjectId: '3',
     type: 'lecture',
-    transcript: 'Agile development is an iterative approach to software development that emphasizes flexibility, collaboration, and customer satisfaction...',
+    audioUrl: 'agile-methodology-lecture.mp3',
+    transcript: 'Agile development is an iterative approach to software development that emphasizes flexibility, collaboration, and customer satisfaction. The Agile methodology promotes adaptive planning, evolutionary development, early delivery, and continuous improvement. Scrum is one of the most popular frameworks within Agile methodology.',
     duration: '38:45',
     uploadDate: '2024-01-14'
+  },
+  {
+    id: '4',
+    title: 'Introduction to Machine Learning',
+    description: 'Fundamental concepts of machine learning, supervised and unsupervised learning.',
+    subjectId: '5',
+    type: 'lecture',
+    audioUrl: 'ml-intro-lecture.mp3',
+    transcript: 'Machine Learning is a subset of artificial intelligence that enables computers to learn and make decisions from data without being explicitly programmed. It involves algorithms that can identify patterns in data and make predictions or decisions based on that data. There are three main types of machine learning: supervised learning, unsupervised learning, and reinforcement learning.',
+    duration: '52:20',
+    uploadDate: '2024-01-16'
+  },
+  {
+    id: '5',
+    title: 'Neural Networks Fundamentals',
+    description: 'Introduction to artificial neural networks and deep learning concepts.',
+    subjectId: '5',
+    type: 'tutorial',
+    audioUrl: 'neural-networks-tutorial.mp3',
+    transcript: 'Neural networks are computing systems inspired by biological neural networks. They consist of interconnected nodes called neurons that process information using a connectionist approach. A neural network learns by adjusting the weights of connections between neurons based on training data. Deep learning uses neural networks with multiple hidden layers to model complex patterns.',
+    duration: '41:15',
+    uploadDate: '2024-01-18'
   }
 ];

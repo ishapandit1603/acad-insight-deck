@@ -21,7 +21,9 @@ import {
   Phone,
   Mail,
   MapPin,
-  Award
+  Award,
+  Square,
+  Headphones
 } from 'lucide-react';
 import {
   students,
@@ -39,6 +41,8 @@ const StudentPortal = () => {
   const [activeSection, setActiveSection] = useState<string>('dashboard');
   const [selectedStudent, setSelectedStudent] = useState<Student | null>(null);
   const [isPlaying, setIsPlaying] = useState<string | null>(null);
+  const [currentContent, setCurrentContent] = useState<any>(null);
+  const speechSynthesis = typeof window !== 'undefined' ? window.speechSynthesis : null;
 
   // Calculate progress chart data for selected student
   const getProgressData = (studentId: string) => {
@@ -63,6 +67,49 @@ const StudentPortal = () => {
       { name: 'Absent', value: absent, color: '#ef4444' },
       { name: 'Late', value: late, color: '#f59e0b' }
     ];
+  };
+
+  const playAudio = (content: any) => {
+    if (!speechSynthesis) return;
+
+    if (isPlaying === content.id) {
+      speechSynthesis.cancel();
+      setIsPlaying(null);
+      setCurrentContent(null);
+      return;
+    }
+
+    speechSynthesis.cancel();
+    
+    const utterance = new SpeechSynthesisUtterance(content.transcript);
+    utterance.rate = 0.9;
+    utterance.pitch = 1;
+    utterance.volume = 0.8;
+    
+    utterance.onstart = () => {
+      setIsPlaying(content.id);
+      setCurrentContent(content);
+    };
+    
+    utterance.onend = () => {
+      setIsPlaying(null);
+      setCurrentContent(null);
+    };
+    
+    utterance.onerror = () => {
+      setIsPlaying(null);
+      setCurrentContent(null);
+    };
+
+    speechSynthesis.speak(utterance);
+  };
+
+  const stopAudio = () => {
+    if (speechSynthesis) {
+      speechSynthesis.cancel();
+      setIsPlaying(null);
+      setCurrentContent(null);
+    }
   };
 
   const navigationCards = [
@@ -123,16 +170,6 @@ const StudentPortal = () => {
       gradient: 'bg-gradient-erp'
     }
   ];
-
-  const playAudio = (contentId: string) => {
-    if (isPlaying === contentId) {
-      setIsPlaying(null);
-    } else {
-      setIsPlaying(contentId);
-      // Here you would implement actual audio playback
-      // For demo purposes, we'll just toggle the state
-    }
-  };
 
   const renderContent = () => {
     switch (activeSection) {
@@ -490,57 +527,162 @@ const StudentPortal = () => {
         return (
           <div className="space-y-6">
             <div>
-              <h2 className="text-2xl font-bold text-erp-navy">Study Content</h2>
-              <p className="text-erp-gray-500">Audio lectures and study materials</p>
+              <h2 className="text-2xl font-bold text-erp-navy">Study Content (Audio Available)</h2>
+              <p className="text-erp-gray-500">Listen to lectures and study materials with AI-powered speech</p>
             </div>
+            
+            {/* Now Playing Section */}
+            {currentContent && isPlaying && (
+              <Card className="border-erp-cyan/30 bg-gradient-to-br from-white to-erp-cyan/5 shadow-erp">
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <h4 className="font-semibold text-erp-navy">🎵 Now Playing:</h4>
+                    <Button 
+                      variant="erp-outline" 
+                      size="sm" 
+                      onClick={stopAudio}
+                      className="hover:bg-erp-red/10 hover:border-erp-red hover:text-erp-red"
+                    >
+                      <Square className="h-4 w-4 mr-1" />
+                      Stop
+                    </Button>
+                  </div>
+                  <p className="text-sm font-medium text-erp-navy mb-3">{currentContent.title}</p>
+                  <div className="flex items-center gap-3">
+                    <div className="flex space-x-1">
+                      {[1, 2, 3, 4, 5].map((i) => (
+                        <div 
+                          key={i} 
+                          className="w-1 bg-erp-cyan rounded-full animate-pulse"
+                          style={{ 
+                            height: `${8 + (i % 3) * 6}px`,
+                            animationDelay: `${i * 0.15}s` 
+                          }}
+                        />
+                      ))}
+                    </div>
+                    <span className="text-xs text-erp-gray-500">Audio playing - {currentContent.duration}</span>
+                    <Headphones className="h-4 w-4 text-erp-cyan" />
+                  </div>
+                </CardContent>
+              </Card>
+            )}
             
             <div className="grid gap-6">
               {studyContent.map((content) => (
-                <Card key={content.id} className="shadow-erp-card hover:shadow-erp transition-shadow">
+                <Card key={content.id} className="shadow-erp-card hover:shadow-erp transition-all duration-300 hover:scale-[1.02]">
                   <CardHeader>
                     <div className="flex items-start justify-between">
-                      <div>
-                        <CardTitle className="text-erp-navy">{content.title}</CardTitle>
-                        <CardDescription className="mt-1">{content.description}</CardDescription>
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-2">
+                          <Badge 
+                            variant="outline" 
+                            className="border-erp-cyan text-erp-cyan bg-erp-cyan/10"
+                          >
+                            {content.type}
+                          </Badge>
+                          <span className="text-xs text-erp-gray-500">⏱️ {content.duration}</span>
+                          <Volume2 className="h-4 w-4 text-erp-cyan" />
+                        </div>
+                        <CardTitle className="text-erp-navy mb-1">{content.title}</CardTitle>
+                        <CardDescription className="text-erp-gray-500">{content.description}</CardDescription>
                       </div>
-                      <Badge variant="outline" className="border-erp-cyan text-erp-cyan">
-                        {content.type}
-                      </Badge>
                     </div>
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-4">
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-4">
+                        <div className="flex items-center gap-3">
                           <Button
                             variant={isPlaying === content.id ? "erp" : "erp-outline"}
                             size="sm"
-                            onClick={() => playAudio(content.id)}
-                            className="animate-pulse-glow"
+                            onClick={() => playAudio(content)}
+                            className={`transition-all duration-200 ${isPlaying === content.id ? 
+                              "animate-pulse-glow shadow-lg" : 
+                              "hover:shadow-md hover:scale-105"
+                            }`}
                           >
                             {isPlaying === content.id ? (
-                              <Pause className="w-4 h-4 mr-2" />
+                              <>
+                                <Pause className="w-4 h-4 mr-2" />
+                                Pause Audio
+                              </>
                             ) : (
-                              <Play className="w-4 h-4 mr-2" />
+                              <>
+                                <Play className="w-4 h-4 mr-2" />
+                                Listen Now
+                              </>
                             )}
-                            {isPlaying === content.id ? 'Playing' : 'Play Audio'}
                           </Button>
-                          <span className="text-sm text-erp-gray-500">Duration: {content.duration}</span>
+                          
+                          {content.audioUrl && (
+                            <Badge variant="secondary" className="bg-erp-gray-100 text-erp-navy">
+                              🎵 MP3 Available
+                            </Badge>
+                          )}
                         </div>
-                        <span className="text-sm text-erp-gray-500">Uploaded: {content.uploadDate}</span>
+                        
+                        <div className="text-right">
+                          <p className="text-xs text-erp-gray-500">Subject: {subjects.find(s => s.id === content.subjectId)?.name}</p>
+                          <p className="text-xs text-erp-gray-500">Uploaded: {new Date(content.uploadDate).toLocaleDateString()}</p>
+                        </div>
                       </div>
                       
-                      <div className="bg-erp-gray-50 p-4 rounded-lg">
-                        <h4 className="font-semibold text-erp-navy mb-2">Transcript Preview</h4>
-                        <p className="text-sm text-erp-gray-500 leading-relaxed">
-                          {content.transcript.substring(0, 200)}...
+                      <div className="bg-erp-gray-50 p-4 rounded-lg border-l-4 border-erp-cyan">
+                        <div className="flex items-center justify-between mb-2">
+                          <h4 className="font-semibold text-erp-navy flex items-center gap-2">
+                            📄 Transcript 
+                            {isPlaying === content.id && <span className="text-xs bg-erp-cyan text-white px-2 py-1 rounded">PLAYING</span>}
+                          </h4>
+                        </div>
+                        <p className="text-sm text-erp-gray-600 leading-relaxed">
+                          {isPlaying === content.id ? content.transcript : `${content.transcript.substring(0, 150)}...`}
                         </p>
+                        {isPlaying !== content.id && (
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="mt-2 text-erp-cyan hover:bg-erp-cyan/10"
+                            onClick={() => playAudio(content)}
+                          >
+                            Click to read full transcript with audio
+                          </Button>
+                        )}
                       </div>
                     </div>
                   </CardContent>
                 </Card>
               ))}
             </div>
+            
+            {/* Audio Learning Features */}
+            <Card className="bg-gradient-to-r from-erp-cyan/10 to-erp-navy/10 border-erp-cyan/20 shadow-erp">
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h4 className="font-semibold text-erp-navy mb-2 flex items-center gap-2">
+                      🎧 Enhanced Audio Learning Features
+                    </h4>
+                    <ul className="text-sm text-erp-gray-600 space-y-1">
+                      <li>• AI-powered text-to-speech conversion</li>
+                      <li>• Full transcript reading during playback</li>
+                      <li>• Hands-free learning experience</li>
+                      <li>• Multiple subject support</li>
+                    </ul>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="text-center">
+                      <Headphones className="h-12 w-12 text-erp-cyan mx-auto mb-1" />
+                      <p className="text-xs text-erp-gray-500">Listen & Learn</p>
+                    </div>
+                    <div className="text-center">
+                      <Volume2 className="h-10 w-10 text-erp-navy/70 mx-auto mb-1" />
+                      <p className="text-xs text-erp-gray-500">Audio Ready</p>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         );
 
