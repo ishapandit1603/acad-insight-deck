@@ -78,50 +78,38 @@ export interface StudyContent {
 export const students: Student[] = [
   {
     id: '1',
-    name: 'Alice Johnson',
+    name: 'Aarav Shah',
     rollNo: 'CS21001',
-    email: 'alice.johnson@university.edu',
+    email: 'aarav.shah@university.edu',
     department: 'Computer Science',
     semester: 6,
     gpa: 3.8,
-    phone: '+1 (555) 123-4567',
-    address: '123 University Ave, Campus City, ST 12345',
+    phone: '+91 98765 43210',
+    address: '123 University Ave, Mumbai, MH 400001',
     enrollmentDate: '2021-08-15'
   },
   {
     id: '2',
-    name: 'Bob Smith',
+    name: 'Kirti Rao',
     rollNo: 'CS21002',
-    email: 'bob.smith@university.edu',
+    email: 'kirti.rao@university.edu',
     department: 'Computer Science',
     semester: 6,
     gpa: 3.6,
-    phone: '+1 (555) 234-5678',
-    address: '456 College Rd, Campus City, ST 12345',
+    phone: '+91 98765 43211',
+    address: '456 College Rd, Pune, MH 411001',
     enrollmentDate: '2021-08-15'
   },
   {
     id: '3',
-    name: 'Carol Davis',
+    name: 'Dev Mehta',
     rollNo: 'EE21003',
-    email: 'carol.davis@university.edu',
+    email: 'dev.mehta@university.edu',
     department: 'Electrical Engineering',
     semester: 6,
     gpa: 3.9,
-    phone: '+1 (555) 345-6789',
-    address: '789 Student St, Campus City, ST 12345',
-    enrollmentDate: '2021-08-15'
-  },
-  {
-    id: '4',
-    name: 'David Wilson',
-    rollNo: 'ME21004',
-    email: 'david.wilson@university.edu',
-    department: 'Mechanical Engineering',
-    semester: 6,
-    gpa: 3.7,
-    phone: '+1 (555) 456-7890',
-    address: '321 Dorm Blvd, Campus City, ST 12345',
+    phone: '+91 98765 43212',
+    address: '789 Student St, Delhi, DL 110001',
     enrollmentDate: '2021-08-15'
   }
 ];
@@ -132,7 +120,7 @@ export const subjects: Subject[] = [
     name: 'Data Structures and Algorithms',
     code: 'CS301',
     credits: 4,
-    instructor: 'Dr. Smith',
+    instructor: 'Dr. Sneha Kapoor',
     department: 'Computer Science',
     semester: 6
   },
@@ -141,7 +129,7 @@ export const subjects: Subject[] = [
     name: 'Database Management Systems',
     code: 'CS302',
     credits: 3,
-    instructor: 'Dr. Johnson',
+    instructor: 'Prof. Aditya Menon',
     department: 'Computer Science',
     semester: 6
   },
@@ -150,7 +138,7 @@ export const subjects: Subject[] = [
     name: 'Software Engineering',
     code: 'CS303',
     credits: 4,
-    instructor: 'Dr. Brown',
+    instructor: 'Dr. Sneha Kapoor',
     department: 'Computer Science',
     semester: 6
   },
@@ -159,7 +147,7 @@ export const subjects: Subject[] = [
     name: 'Computer Networks',
     code: 'CS304',
     credits: 3,
-    instructor: 'Dr. Davis',
+    instructor: 'Prof. Aditya Menon',
     department: 'Computer Science',
     semester: 6
   }
@@ -172,7 +160,7 @@ export const attendanceRecords: AttendanceRecord[] = [
     subjectId: '1',
     date: '2024-01-15',
     status: 'present',
-    studentName: 'Alice Johnson',
+    studentName: 'Aarav Shah',
     subjectName: 'Data Structures and Algorithms'
   },
   {
@@ -181,7 +169,7 @@ export const attendanceRecords: AttendanceRecord[] = [
     subjectId: '2',
     date: '2024-01-15',
     status: 'present',
-    studentName: 'Alice Johnson',
+    studentName: 'Aarav Shah',
     subjectName: 'Database Management Systems'
   },
   {
@@ -190,7 +178,7 @@ export const attendanceRecords: AttendanceRecord[] = [
     subjectId: '1',
     date: '2024-01-15',
     status: 'absent',
-    studentName: 'Bob Smith',
+    studentName: 'Kirti Rao',
     subjectName: 'Data Structures and Algorithms'
   },
   {
@@ -199,7 +187,7 @@ export const attendanceRecords: AttendanceRecord[] = [
     subjectId: '2',
     date: '2024-01-15',
     status: 'late',
-    studentName: 'Bob Smith',
+    studentName: 'Kirti Rao',
     subjectName: 'Database Management Systems'
   }
 ];
@@ -240,7 +228,7 @@ export const progressRecords: ProgressRecord[] = [
     score: 85,
     maxScore: 100,
     date: '2024-01-10',
-    studentName: 'Alice Johnson',
+    studentName: 'Aarav Shah',
     subjectName: 'Data Structures and Algorithms'
   },
   {
@@ -251,7 +239,7 @@ export const progressRecords: ProgressRecord[] = [
     score: 92,
     maxScore: 100,
     date: '2024-01-12',
-    studentName: 'Alice Johnson',
+    studentName: 'Aarav Shah',
     subjectName: 'Database Management Systems'
   },
   {
@@ -262,7 +250,7 @@ export const progressRecords: ProgressRecord[] = [
     score: 78,
     maxScore: 100,
     date: '2024-01-10',
-    studentName: 'Bob Smith',
+    studentName: 'Kirti Rao',
     subjectName: 'Data Structures and Algorithms'
   },
   {
@@ -273,7 +261,7 @@ export const progressRecords: ProgressRecord[] = [
     score: 88,
     maxScore: 100,
     date: '2024-01-14',
-    studentName: 'Alice Johnson',
+    studentName: 'Aarav Shah',
     subjectName: 'Software Engineering'
   }
 ];
@@ -281,30 +269,21 @@ export const progressRecords: ProgressRecord[] = [
 export const faculty: Faculty[] = [
   {
     id: '1',
-    name: 'Dr. Michael Smith',
-    email: 'michael.smith@university.edu',
+    name: 'Dr. Sneha Kapoor',
+    email: 'sneha.kapoor@university.edu',
     department: 'Computer Science',
     designation: 'Professor',
-    phone: '+1 (555) 111-2222',
+    phone: '+91 98765 11111',
     subjects: ['CS301', 'CS305']
   },
   {
     id: '2',
-    name: 'Dr. Sarah Johnson',
-    email: 'sarah.johnson@university.edu',
+    name: 'Prof. Aditya Menon',
+    email: 'aditya.menon@university.edu',
     department: 'Computer Science',
     designation: 'Associate Professor',
-    phone: '+1 (555) 222-3333',
+    phone: '+91 98765 22222',
     subjects: ['CS302', 'CS306']
-  },
-  {
-    id: '3',
-    name: 'Dr. Robert Brown',
-    email: 'robert.brown@university.edu',
-    department: 'Computer Science',
-    designation: 'Assistant Professor',
-    phone: '+1 (555) 333-4444',
-    subjects: ['CS303', 'CS307']
   }
 ];
 

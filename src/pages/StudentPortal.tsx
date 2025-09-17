@@ -696,7 +696,7 @@ const StudentPortal = () => {
                 <GraduationCap className="w-5 h-5 text-white" />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-erp-navy">EduPortal</h1>
+                <h1 className="text-xl font-bold text-erp-navy">Smart Learn</h1>
                 <p className="text-xs text-erp-gray-500">Learning Assistant System</p>
               </div>
             </div>

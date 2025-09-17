@@ -8,49 +8,49 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* ERP Portal Design System - Professional Educational Theme */
+    /* Smart Learn Design System - Professional Educational Theme */
     --background: 0 0% 98%;
-    --foreground: 215 25% 15%;
+    --foreground: 20 25% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 215 25% 15%;
+    --card-foreground: 20 25% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 215 25% 15%;
+    --popover-foreground: 20 25% 15%;
 
-    /* Navy Blue Primary */
-    --primary: 215 85% 25%;
+    /* Orange Primary */
+    --primary: 25 85% 50%;
     --primary-foreground: 0 0% 98%;
-    --primary-hover: 215 85% 20%;
+    --primary-hover: 25 85% 45%;
 
-    /* Cyan Secondary */
-    --secondary: 189 95% 35%;
+    /* Dark Orange Secondary */
+    --secondary: 20 90% 35%;
     --secondary-foreground: 0 0% 98%;
-    --secondary-hover: 189 95% 30%;
+    --secondary-hover: 20 90% 30%;
 
     /* Muted grays for professional look */
-    --muted: 210 15% 95%;
-    --muted-foreground: 215 15% 45%;
+    --muted: 20 15% 95%;
+    --muted-foreground: 20 15% 45%;
 
-    /* Cyan accent */
-    --accent: 189 85% 45%;
+    /* Light orange accent */
+    --accent: 30 85% 55%;
     --accent-foreground: 0 0% 98%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 214.3 31.8% 91.4%;
+    --border: 20 31.8% 91.4%;
     --input: 0 0% 100%;
-    --ring: 189 85% 45%;
+    --ring: 25 85% 50%;
 
-    /* Custom ERP Portal Colors */
-    --erp-navy: 215 85% 25%;
-    --erp-cyan: 189 95% 35%;
-    --erp-cyan-light: 189 85% 45%;
-    --erp-gray-50: 210 15% 98%;
-    --erp-gray-100: 210 15% 95%;
-    --erp-gray-500: 215 15% 45%;
-    --erp-gray-900: 215 25% 15%;
+    /* Custom Smart Learn Colors */
+    --erp-navy: 0 0% 15%;
+    --erp-cyan: 25 85% 50%;
+    --erp-cyan-light: 30 85% 55%;
+    --erp-gray-50: 20 15% 98%;
+    --erp-gray-100: 20 15% 95%;
+    --erp-gray-500: 20 15% 45%;
+    --erp-gray-900: 0 0% 15%;
 
     /* Gradients */
     --gradient-primary: linear-gradient(135deg, hsl(var(--erp-navy)), hsl(var(--erp-cyan)));
@@ -82,44 +82,44 @@ All colors MUST be HSL.
   }
 
   .dark {
-    /* Dark mode for ERP Portal */
-    --background: 215 25% 8%;
+    /* Dark mode for Smart Learn */
+    --background: 0 0% 8%;
     --foreground: 0 0% 95%;
 
-    --card: 215 25% 12%;
+    --card: 0 0% 12%;
     --card-foreground: 0 0% 95%;
 
-    --popover: 215 25% 12%;
+    --popover: 0 0% 12%;
     --popover-foreground: 0 0% 95%;
 
-    --primary: 189 95% 45%;
-    --primary-foreground: 215 25% 8%;
-    --primary-hover: 189 95% 50%;
+    --primary: 25 85% 55%;
+    --primary-foreground: 0 0% 8%;
+    --primary-hover: 25 85% 60%;
 
-    --secondary: 215 85% 35%;
+    --secondary: 20 90% 40%;
     --secondary-foreground: 0 0% 95%;
-    --secondary-hover: 215 85% 40%;
+    --secondary-hover: 20 90% 45%;
 
-    --muted: 215 25% 15%;
-    --muted-foreground: 215 15% 65%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 65%;
 
-    --accent: 189 85% 50%;
-    --accent-foreground: 215 25% 8%;
+    --accent: 30 85% 60%;
+    --accent-foreground: 0 0% 8%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 95%;
 
-    --border: 215 25% 20%;
-    --input: 215 25% 15%;
-    --ring: 189 85% 50%;
+    --border: 0 0% 20%;
+    --input: 0 0% 15%;
+    --ring: 25 85% 55%;
 
-    /* Dark mode ERP colors */
-    --erp-navy: 215 85% 35%;
-    --erp-cyan: 189 95% 45%;
-    --erp-cyan-light: 189 85% 50%;
-    --erp-gray-50: 215 25% 15%;
-    --erp-gray-100: 215 25% 18%;
-    --erp-gray-500: 215 15% 65%;
+    /* Dark mode Smart Learn colors */
+    --erp-navy: 0 0% 15%;
+    --erp-cyan: 25 85% 55%;
+    --erp-cyan-light: 30 85% 60%;
+    --erp-gray-50: 0 0% 15%;
+    --erp-gray-100: 0 0% 18%;
+    --erp-gray-500: 0 0% 65%;
     --erp-gray-900: 0 0% 95%;
 
     --gradient-primary: linear-gradient(135deg, hsl(var(--erp-navy)), hsl(var(--erp-cyan)));
