@@ -150,6 +150,15 @@ export const subjects: Subject[] = [
     instructor: 'Prof. Aditya Menon',
     department: 'Computer Science',
     semester: 6
+  },
+  {
+    id: '5',
+    name: 'Artificial Intelligence and Machine Learning',
+    code: 'CS305',
+    credits: 4,
+    instructor: 'Dr. Sneha Kapoor',
+    department: 'Computer Science',
+    semester: 6
   }
 ];
 
