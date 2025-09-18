@@ -272,6 +272,28 @@ export const progressRecords: ProgressRecord[] = [
     date: '2024-01-14',
     studentName: 'Aarav Shah',
     subjectName: 'Software Engineering'
+  },
+  {
+    id: '5',
+    studentId: '1',
+    subjectId: '5',
+    assessmentType: 'Quiz 1 - Neural Networks',
+    score: 65,
+    maxScore: 100,
+    date: '2024-01-16',
+    studentName: 'Aarav Shah',
+    subjectName: 'Artificial Intelligence and Machine Learning'
+  },
+  {
+    id: '6',
+    studentId: '1',
+    subjectId: '5',
+    assessmentType: 'Quiz 2 - ML Algorithms',
+    score: 70,
+    maxScore: 100,
+    date: '2024-01-18',
+    studentName: 'Aarav Shah',
+    subjectName: 'Artificial Intelligence and Machine Learning'
   }
 ];
 

@@ -40,6 +40,7 @@ import {
   type ProgressRecord
 } from '@/data/mockData';
 import { useVoiceAssistant } from '@/hooks/useVoiceAssistant';
+import { StudyRecommendations } from '@/components/StudyRecommendations';
 
 const StudentPortal = () => {
   const [activeSection, setActiveSection] = useState<string>('dashboard');
@@ -538,6 +539,12 @@ const StudentPortal = () => {
               <h2 className="text-2xl font-bold text-erp-navy">Study Content (Audio Available)</h2>
               <p className="text-erp-gray-500">Listen to lectures and study materials with AI-powered speech</p>
             </div>
+            
+            {/* Study Recommendations Section */}
+            <StudyRecommendations 
+              studentId="1" 
+              onReadContent={(content) => voiceAssistant.speak(content)}
+            />
             
             {/* Now Playing Section */}
             {currentContent && isPlaying && (

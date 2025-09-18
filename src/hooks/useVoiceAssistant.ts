@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { students, subjects, attendanceRecords, reminders, progressRecords, faculty, studyContent } from '@/data/mockData';
+import { getStudyRecommendation, analyzePerformance } from '@/utils/performanceAnalyzer';
 
 // Type declarations for Speech Recognition API
 interface SpeechRecognition extends EventTarget {
@@ -99,6 +100,40 @@ export const useVoiceAssistant = ({ onSectionChange }: VoiceAssistantOptions) =>
   const processVoiceCommand = useCallback((command: string) => {
     console.log('Voice command received:', command);
 
+    // Check for "read" commands for specific study content
+    if (command.includes('read ')) {
+      const contentTitle = command.replace('read ', '').trim();
+      const matchedContent = studyContent.find(content => 
+        content.title.toLowerCase().includes(contentTitle.toLowerCase())
+      );
+      
+      if (matchedContent) {
+        speak(`Reading ${matchedContent.title}. ${matchedContent.transcript}`);
+        return;
+      } else {
+        speak(`I could not find content titled "${contentTitle}". Available content includes: ${studyContent.map(c => c.title).join(', ')}`);
+        return;
+      }
+    }
+
+    // Check for performance recommendations
+    if (command.includes('recommend') || command.includes('suggestion') || command.includes('help me study')) {
+      const recommendation = getStudyRecommendation('1'); // Using student ID 1 as example
+      
+      if (recommendation) {
+        speak(recommendation.message);
+        setTimeout(() => {
+          const titles = recommendation.contentItems.map(item => item.title).join(', ');
+          speak(`I recommend studying: ${titles}. You can say "read" followed by any topic name to hear the content.`);
+        }, 3000);
+        return;
+      } else {
+        speak('Great job! Your performance is strong across all subjects. Keep up the excellent work!');
+        return;
+      }
+    }
+
+    // Existing navigation commands
     if (command.includes('open student records') || command.includes('student records')) {
       onSectionChange('students');
       speak('Opening student records. Here are the students:');
@@ -152,7 +187,7 @@ export const useVoiceAssistant = ({ onSectionChange }: VoiceAssistantOptions) =>
       speak('Opening study content section. Here are the available study materials:');
       setTimeout(() => {
         const contentInfo = studyContent.map(c => `${c.title}, ${c.type}, duration ${c.duration}`).join('. ');
-        speak(`Study content: ${contentInfo}`);
+        speak(`Study content: ${contentInfo}. You can say "read" followed by any content title to hear it aloud, or say "recommend" for personalized study suggestions.`);
       }, 1000);
     }
     else if (command.includes('stop speaking') || command.includes('stop')) {
@@ -162,7 +197,7 @@ export const useVoiceAssistant = ({ onSectionChange }: VoiceAssistantOptions) =>
       }
     }
     else {
-      speak('I did not understand that command. You can say things like: Open student records, Open subjects, Open attendance, Open reminders, Open progress records, Open faculty directory, or Open study content.');
+      speak('I did not understand that command. You can say: Open student records, Open subjects, Open study content, Read followed by content title, Recommend for study suggestions, or Stop speaking.');
     }
   }, [onSectionChange, speak]);
 
