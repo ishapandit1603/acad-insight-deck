@@ -23,7 +23,10 @@ import {
   MapPin,
   Award,
   Square,
-  Headphones
+  Headphones,
+  Mic,
+  MicOff,
+  VolumeX
 } from 'lucide-react';
 import {
   students,
@@ -36,6 +39,7 @@ import {
   type Student,
   type ProgressRecord
 } from '@/data/mockData';
+import { useVoiceAssistant } from '@/hooks/useVoiceAssistant';
 
 const StudentPortal = () => {
   const [activeSection, setActiveSection] = useState<string>('dashboard');
@@ -43,6 +47,10 @@ const StudentPortal = () => {
   const [isPlaying, setIsPlaying] = useState<string | null>(null);
   const [currentContent, setCurrentContent] = useState<any>(null);
   const speechSynthesis = typeof window !== 'undefined' ? window.speechSynthesis : null;
+  
+  const voiceAssistant = useVoiceAssistant({
+    onSectionChange: setActiveSection
+  });
 
   // Calculate progress chart data for selected student
   const getProgressData = (studentId: string) => {
@@ -843,19 +851,53 @@ const StudentPortal = () => {
               </div>
             </div>
             
-            <nav className="hidden md:flex items-center gap-1">
-              {navigationCards.map((item) => (
-                <Button
-                  key={item.id}
-                  variant={activeSection === item.id ? "erp" : "ghost"}
-                  size="sm"
-                  onClick={() => setActiveSection(item.id)}
-                  className="text-sm"
-                >
-                  {item.title}
-                </Button>
-              ))}
-            </nav>
+            <div className="flex items-center gap-3">
+              {voiceAssistant.isSupported && (
+                <div className="flex items-center gap-2">
+                  <Button
+                    variant={voiceAssistant.isListening ? "default" : "erp-outline"}
+                    onClick={voiceAssistant.isListening ? voiceAssistant.stopListening : voiceAssistant.startListening}
+                    size="sm"
+                    className={`flex items-center gap-2 ${voiceAssistant.isListening ? 'bg-red-500 hover:bg-red-600 text-white' : ''}`}
+                  >
+                    {voiceAssistant.isListening ? (
+                      <>
+                        <MicOff className="w-4 h-4" />
+                        Listening...
+                      </>
+                    ) : (
+                      <>
+                        <Mic className="w-4 h-4" />
+                        Voice
+                      </>
+                    )}
+                  </Button>
+                  {voiceAssistant.isSpeaking && (
+                    <Button
+                      variant="destructive"
+                      onClick={voiceAssistant.stopSpeaking}
+                      size="sm"
+                    >
+                      <VolumeX className="w-4 h-4" />
+                    </Button>
+                  )}
+                </div>
+              )}
+              
+              <nav className="hidden md:flex items-center gap-1">
+                {navigationCards.map((item) => (
+                  <Button
+                    key={item.id}
+                    variant={activeSection === item.id ? "erp" : "ghost"}
+                    size="sm"
+                    onClick={() => setActiveSection(item.id)}
+                    className="text-sm"
+                  >
+                    {item.title}
+                  </Button>
+                ))}
+              </nav>
+            </div>
           </div>
         </div>
       </header>
